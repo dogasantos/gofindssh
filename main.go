@@ -46,7 +46,7 @@ func main() {
 	}
 
 	if err := dialHost(); err != nil {
-		log.Println("Couldn't connect to host, exiting.")
+		log.Println("Couldn't connect to %s, exiting.",host)
 		os.Exit(1)
 	}
 
@@ -79,7 +79,7 @@ func main() {
 		for _, pass := range passwords {
 			throttler <- 0
 			wg.Add(1)
-			go connect(&wg, outfile, user, pass)
+			go connect(&wg, host, outfile, user, pass)
 		}
 	}
 	wg.Wait()
@@ -98,7 +98,7 @@ func dialHost() (err error) {
 func connect(wg *sync.WaitGroup, o *os.File, user, pass string) {
 	defer wg.Done()
 
-	debugln(fmt.Sprintf("Trying %s:%s...\n", user, pass))
+	debugln(fmt.Sprintf("Trying %s %s:%s...\n", host, user, pass))
 
 	sshConfig := &ssh.ClientConfig{
 		User: user,
@@ -117,8 +117,8 @@ func connect(wg *sync.WaitGroup, o *os.File, user, pass string) {
 	}
 	defer c.Close()
 
-	log.Printf("[Found] Got it! %s:%s\n", user, pass)
-	fmt.Fprintf(o, "%s:%s\n", user, pass)
+	log.Printf("[Found] Got it! %s = %s:%s\n", host, user, pass)
+	fmt.Fprintf(o, "%s = %s:%s\n", host, user, pass)
 
 	debugln("Trying to run `id`...")
 
