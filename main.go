@@ -53,7 +53,7 @@ func main() {
 	}
 
 	if err := dialHost(); err != nil {
-		log.Println("Couldn't connect to %s, exiting.",host)
+		log.Println("Couldn't connect to %s, exiting.",*host)
 		os.Exit(1)
 	}
 
@@ -93,7 +93,7 @@ func main() {
 }
 
 func dialHost() (err error) {
-	debugln("Trying to connect to host...")
+	debugln("Trying to connect to host: %s", *host)
 	conn, err := net.Dial("tcp", *host)
 	if err != nil {
 		return
@@ -105,7 +105,7 @@ func dialHost() (err error) {
 func connect(wg *sync.WaitGroup, o *os.File, user, pass string) {
 	defer wg.Done()
 
-	debugln(fmt.Sprintf("Trying %s %s:%s...\n", &host, user, pass))
+	debugln(fmt.Sprintf("Trying %s %s:%s...\n", *host, user, pass))
 
 	sshConfig := &ssh.ClientConfig{
 		User: user,
@@ -124,7 +124,7 @@ func connect(wg *sync.WaitGroup, o *os.File, user, pass string) {
 	}
 	defer c.Close()
 
-	log.Printf("[Found] Got it! %s = %s:%s\n", &host, user, pass)
+	log.Printf("[Found] Got it! %s = %s:%s\n", *host, user, pass)
 	fmt.Fprintf(o, "%s = %s:%s\n", host, user, pass)
 
 	debugln("Trying to run `id`...")
