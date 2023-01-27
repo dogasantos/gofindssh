@@ -125,7 +125,7 @@ func connect(wg *sync.WaitGroup, o *os.File, user, pass string) {
 	defer c.Close()
 
 	log.Printf("[Found] Got it! %s = %s:%s\n", *host, user, pass)
-	fmt.Fprintf(o, "%s = %s:%s\n", host, user, pass)
+	fmt.Fprintf(o, "%s = %s:%s\n", *host, user, pass)
 
 	debugln("Trying to run `id`...")
 
