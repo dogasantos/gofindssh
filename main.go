@@ -53,7 +53,7 @@ func main() {
 	}
 
 	if err := dialHost(); err != nil {
-		log.Println("Couldn't connect to %s, exiting.",*host)
+		log.Printf("Couldn't connect to %s, exiting.\n",*host)
 		os.Exit(1)
 	}
 
@@ -93,7 +93,7 @@ func main() {
 }
 
 func dialHost() (err error) {
-	debugln("Trying to connect to host: %s", *host)
+	debugln("Trying to connect to host")
 	conn, err := net.Dial("tcp", *host)
 	if err != nil {
 		return
