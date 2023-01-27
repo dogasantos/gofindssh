@@ -19,7 +19,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-const LIMIT = 8
+const LIMIT = 20
 const VERSION = "v0.1"
 
 var throttler = make(chan int, LIMIT)
