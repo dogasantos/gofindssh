@@ -34,13 +34,14 @@ var (
 )
 
 func usage() {
-	fmt.Printf(`
+	fmt.Printf(`version: %s
+
 Usage: %s [-h HOST:PORT] [-u USERS] [-p PASSWORDS] [-d]
 
 Examples:
 	%s -h 127.0.0.1:22 -u my-users.txt -p my-passes.txt -o results.txt
 	%s -h victim.tld:2233 -u users.txt -p passwords.lst -d > output.txt
-`, os.Args[0], os.Args[0], os.Args[0])
+`, VERSION, os.Args[0], os.Args[0], os.Args[0])
 	os.Exit(1)
 }
 
