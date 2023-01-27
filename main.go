@@ -1,5 +1,10 @@
 package main
 
+/*
+this fork has been made so we can SHOW THE SERVER it manages to login....
+pretty basic
+
+*/
 import (
 	"bufio"
 	"bytes"
