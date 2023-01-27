@@ -15,6 +15,7 @@ import (
 )
 
 const LIMIT = 8
+const VERSION = "v0.1"
 
 var throttler = make(chan int, LIMIT)
 
