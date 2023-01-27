@@ -79,7 +79,7 @@ func main() {
 		for _, pass := range passwords {
 			throttler <- 0
 			wg.Add(1)
-			go connect(&wg, host, outfile, user, pass)
+			go connect(&wg, outfile, user, pass)
 		}
 	}
 	wg.Wait()
